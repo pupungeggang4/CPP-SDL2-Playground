@@ -77,3 +77,6 @@ luac.out
 *.png~
 Release/
 main
+
+glad/
+glades/
