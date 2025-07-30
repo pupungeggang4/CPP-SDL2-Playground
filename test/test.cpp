@@ -63,6 +63,7 @@ const char* fragmentShaderSource = R"(#version 330 core
 
 unsigned int frameCurrent = 0;
 unsigned int framePrevious = 0;
+unsigned int fps = 60;
 int delta = 0;
 float rx = 0, ry = 0, rz = 0;
 
@@ -158,22 +159,26 @@ int main(int argc, char* argv[]) {
     glEnableVertexAttribArray(laColor);
 
     while (!glfwWindowShouldClose(window)) {
-        framePrevious = frameCurrent;
         frameCurrent = SDL_GetTicks();
         delta = frameCurrent - framePrevious;
-        rz += delta / 1000.0;
 
-        glClearColor(0.0, 0.0, 0.0, 1.0);
-        glEnable(GL_DEPTH_TEST);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glLineWidth(2);
-        
-        glUseProgram(shaderProgram);
-        glUniformMatrix4fv(luMat, 1, GL_FALSE, m);
-        glUniform3f(luRot, rx, ry, rz);
-        glBindVertexArray(vao);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-        glfwSwapBuffers(window);
+        if (delta >= 1000 / fps) {
+            framePrevious = frameCurrent;
+            rz += delta / 1000.0;
+            std::cout << delta << std::endl;
+            glClearColor(0.0, 0.0, 0.0, 1.0);
+            glEnable(GL_DEPTH_TEST);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            glLineWidth(2);
+            
+            glUseProgram(shaderProgram);
+            glUniformMatrix4fv(luMat, 1, GL_FALSE, m);
+            glUniform3f(luRot, rx, ry, rz);
+            glBindVertexArray(vao);
+            glDrawArrays(GL_TRIANGLES, 0, 3);
+            glfwSwapBuffers(window);
+        }
+
         glfwPollEvents();
     }
 
