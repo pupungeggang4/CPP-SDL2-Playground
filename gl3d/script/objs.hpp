@@ -1,6 +1,6 @@
 #include "general.hpp"
 
-class Vector3;
+class Vec3;
 class Cuboid3;
 class ColorCuboid3;
 class Part3;
@@ -23,10 +23,10 @@ class Game {
         static void cbKey(GLFWwindow* window, int key, int scancode, int action, int mods);
 };
 
-class Vector3 {
+class Vec3 {
     public:
         float x, y, z;
-        Vector3(float x = 0.0, float y = 0.0, float z = 0.0);
+        Vec3(float x = 0.0, float y = 0.0, float z = 0.0);
 };
 
 class Shape3 {
@@ -35,8 +35,8 @@ class Shape3 {
 
 class Cuboid3 : public Shape3 {
     public:
-        Vector3 pos = Vector3(), size = Vector3(), rot = Vector3();
-        Cuboid3(Vector3 pos, Vector3 size, Vector3 rot);
+        Vec3 pos = Vec3(), size = Vec3(), rot = Vec3();
+        Cuboid3(Vec3 pos, Vec3 size, Vec3 rot);
 };
 
 class Part3 {
@@ -46,7 +46,7 @@ class Part3 {
 
 class ColorCuboid3 : public Cuboid3 {
     public:
-        Vector3 pos = Vector3(), size = Vector3(), rot = Vector3();
+        Vec3 pos = Vec3(), size = Vec3(), rot = Vec3();
         float color[4];
-        ColorCuboid3(Vector3 pos, Vector3 size, Vector3 rot, float color[4]);
+        ColorCuboid3(Vec3 pos, Vec3 size, Vec3 rot, float color[4]);
 };
