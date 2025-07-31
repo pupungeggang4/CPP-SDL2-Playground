@@ -12,11 +12,15 @@ class Game {
         GLuint program, vShader, fShader;
         GLuint vao, bTriangle;
         GLint laPosition;
+        GLFWwindow *window;
 
         Game();
         void gameGLInit();
         void gameSDLInit();
         void run();
+        void loop();
+        static void cbWindowSizeChange(GLFWwindow* window, int width, int height);
+        static void cbKey(GLFWwindow* window, int key, int scancode, int action, int mods);
 };
 
 class Vector3 {
