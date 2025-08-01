@@ -2,13 +2,16 @@
 
 class Vec3;
 class Cuboid3;
-class ColorCuboid3;
 class Part3;
+class SingleObj;
+class ColorCuboid3;
 
 class Game;
 
 class Game {
     public:
+        int success; float scale;
+        char infoLog[2048];
         GLuint program, vShader, fShader;
         GLuint vao, bTriangle;
         GLint laPosition;
@@ -44,7 +47,10 @@ class Part3 {
         Shape3 shape;
 };
 
-class ColorCuboid3 : public Cuboid3 {
+class SingleObj {
+};
+
+class ColorCuboid3 : public SingleObj {
     public:
         Vec3 pos = Vec3(), size = Vec3(), rot = Vec3();
         float color[4];
