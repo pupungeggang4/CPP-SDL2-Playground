@@ -7,10 +7,12 @@ Game::Game() {
 
 void Game::gameSDLInit() {
     SDL_Init(SDL_INIT_VIDEO);
-    //scale = SDL_GetWindowDisplayScale(window);
-    //std::cout << scale << std::endl;
 
+    #ifdef __LINUX__
     window = SDL_CreateWindow("2D Adventure Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280 * 1.5, 720 * 1.5, SDL_WINDOW_SHOWN);
+    #else
+    window = SDL_CreateWindow("2D Adventure Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, SDL_WINDOW_SHOWN);
+    #endif
     surface = SDL_GetWindowSurface(window);
 }
 
