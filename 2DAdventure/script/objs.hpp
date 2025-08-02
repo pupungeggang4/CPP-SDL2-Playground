@@ -14,7 +14,8 @@ class Game {
         float scale;
         std::shared_ptr<Player> player = std::make_shared<Player>();
         std::shared_ptr<World> world = std::make_shared<World>();
-        SDL_Window *window; SDL_Surface *surface;
+        SDL_Window *window; SDL_Surface *surface, *surfaceUI; SDL_Renderer *renderer;
+        SDL_Rect *screenRect;
 
         Game();
         void gameSDLInit();
