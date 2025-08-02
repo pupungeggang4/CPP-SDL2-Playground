@@ -1,10 +1,21 @@
 #pragma once
 #include "general.hpp"
 
+class Game;
+class Player;
+class World;
+class WorldPlayer;
+class Vec2;
+class Rect2;
+
 class Game {
     public:
-        //Player player = Player(); World world = World();
-        SDL_Window *window;
+        bool running = true;
+        float scale;
+        std::shared_ptr<Player> player = std::make_shared<Player>();
+        std::shared_ptr<World> world = std::make_shared<World>();
+        SDL_Window *window; SDL_Surface *surface;
+
         Game();
         void gameSDLInit();
         void run();
@@ -18,7 +29,7 @@ class Player {
 
 class World {
     public:
-        //WorldPlayer player = WorldPlayer();
+        std::shared_ptr<WorldPlayer> player = std::make_shared<WorldPlayer>();
         World();
 };
 
@@ -33,13 +44,12 @@ class Vec2 {
     public:
         float x, y;
         Vec2(float x = 0, float y = 0);
+        bool insideRect(std::shared_ptr<Rect2> r);
 };
 
-template <typename V>
 class Rect2 {
     public:
-        V pos = Vec2();
-        V size = Vec2();
-        Rect2(V pos1, V size1);
+        std::shared_ptr<Vec2> pos, size;
+        Rect2(std::shared_ptr<Vec2> pos, std::shared_ptr<Vec2> size);
         float getArea();
 };

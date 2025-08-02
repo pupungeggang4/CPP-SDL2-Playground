@@ -6,12 +6,15 @@ Vec2::Vec2(float x, float y) {
     this->y = y;
 }
 
-template <typename V>
-Rect2::Rect2(V pos1, V size1) {
-    pos = pos1;
-    size = size1;
+bool Vec2::insideRect(std::shared_ptr<Rect2> r) {
+    return this->x > r->pos->x - r->size->x / 2 && this->x < r->pos->x + r->size->x / 2 && this->y > r->pos->y - r->size->y / 2 && this->y < r->pos->y + r->size->y / 2;
+}
+
+Rect2::Rect2(std::shared_ptr<Vec2> pos, std::shared_ptr<Vec2> size) {
+    this->pos = pos;
+    this->size = size;
 }
 
 float Rect2::getArea() {
-    return size.x * size.y;
+    return this->size->x * this->size->y;
 }
