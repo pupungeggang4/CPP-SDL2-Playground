@@ -1,13 +1,12 @@
 #include "general.hpp"
 #include "bufferdata.hpp"
 
-class Vec3;
+class Game;
 class Cuboid3;
+class Vec3;
 class Part3;
 class SingleObj;
 class ColorCuboid3;
-
-class Game;
 
 class Game {
     public:
