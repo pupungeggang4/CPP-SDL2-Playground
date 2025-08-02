@@ -73,10 +73,6 @@ void Game::gameGLInit() {
 
     glBindBuffer(GL_ARRAY_BUFFER, bTriangle);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 9, &bTriangleData[0], GL_STATIC_DRAW);
-
-    std::vector<int> a = {1};
-    a.push_back(2);
-    std::cout << a[1] << std::endl;
 }
 
 void Game::gameSDLInit() {
