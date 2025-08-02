@@ -1,3 +1,4 @@
+#pragma once
 // Headers
 // STL Headers
 #include <iostream>
@@ -7,11 +8,9 @@
 #include <sstream>
 #include <fstream>
 #include <vector>
+#include <deque>
 
 // Library Headers
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <SDL2/SDL.h>
-
-// Constants
-#include "bufferdata.hpp"

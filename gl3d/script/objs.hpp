@@ -1,4 +1,5 @@
 #include "general.hpp"
+#include "bufferdata.hpp"
 
 class Vec3;
 class Cuboid3;
