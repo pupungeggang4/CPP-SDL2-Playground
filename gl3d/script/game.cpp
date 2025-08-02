@@ -72,7 +72,7 @@ void Game::gameGLInit() {
     glGenBuffers(1, &bTriangle);
 
     glBindBuffer(GL_ARRAY_BUFFER, bTriangle);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 9, &bTriangleV[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 9, &bTriangleData[0], GL_STATIC_DRAW);
 }
 
 void Game::gameSDLInit() {

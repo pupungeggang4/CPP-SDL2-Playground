@@ -4,11 +4,13 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <cmath>
+
+
 #include <string>
+
 #include <sstream>
 #include <fstream>
-#include <vector>
-#include <deque>
 
 // Library Headers
 #include <glad/glad.h>

@@ -49,11 +49,13 @@ class Part3 {
 };
 
 class SingleObj {
+    public:
+        SingleObj();
 };
 
-class ColorCuboid3 : public SingleObj {
+class ColorCuboid3 {
     public:
         Vec3 pos = Vec3(), size = Vec3(), rot = Vec3();
-        float color[4];
-        ColorCuboid3(Vec3 pos, Vec3 size, Vec3 rot, float color[4]);
+        std::array<float, 4> color;
+        ColorCuboid3(Vec3 pos, Vec3 size, Vec3 rot, std::array<float, 4> color);
 };

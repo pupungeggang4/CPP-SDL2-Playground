@@ -3,7 +3,8 @@
 
 int main(int argc, char *argv[]) {
     Cuboid3 c = Cuboid3(Vec3(), Vec3(), Vec3());
-    std::cout << c.pos.x << std::endl;
+    ColorCuboid3 cc = ColorCuboid3(Vec3(), Vec3(), Vec3(), {0.0, 1.0, 0.0, 1.0});
+    std::cout << cc.color[1] << std::endl;
     Game game = Game();
     glfwDestroyWindow(game.window);
     glfwTerminate();

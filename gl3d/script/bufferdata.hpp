@@ -1,5 +1,5 @@
 #pragma once
 #include "general.hpp"
 
-extern const float bTriangleData[9];
-extern std::vector<float> bTriangleV;
+extern std::vector<float> bTriangleData;
+extern std::vector<float> bHUDData;
