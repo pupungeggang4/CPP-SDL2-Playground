@@ -4,6 +4,7 @@
 Game::Game() {
     gameGLInit();
     gameSDLInit();
+    gameVarInit();
     run();
 }
 
@@ -108,43 +109,41 @@ void Game::gameSDLInit() {
     SDL_Init(SDL_INIT_AUDIO);
 }
 
+void Game::gameVarInit() {
+    camera = make_shared<Camera3>();
+    world = make_shared<World>();
+    std::array<float, 4> a = {0.0, 1.0, 1.0, 1.0};
+    c = make_shared<ColorCuboid3>(
+        make_shared<Vec3>(0.0, 0.0, 0.0), make_shared<Vec3>(0.3, 0.3, 0.3), make_shared<Vec3>(0.0, 0.0, 0.0), (std::array<float, 4>){0.0, 1.0, 1.0, 1.0}
+    );
+}
+
 void Game::run() {
+    int d = 16;
     while (!glfwWindowShouldClose(window)) {
-        loop();
+        fCurrent = SDL_GetTicks();
+        delta = fCurrent - fPrevious;
+        if (delta > d) {
+            fPrevious = SDL_GetTicks();
+            loop();
+        }
     }
 }
 
 void Game::loop() {
+    c->rot->x += 0.5 * 16 / 1000;
+    c->rot->y += 0.5 * 16 / 1000;
+
     glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glUseProgram(program);
 
     glBindVertexArray(vao);
 
-    glUniform1i(luModeV, 1);
-    glUniform1i(luModeF, 3);
-    glUniform3f(luMPos, 0.0, 0.0, 0.0);
-    glUniform3f(luMRot, 0.5, 0.5, 0.0);
-    glUniform3f(luMSize, 1.0, 1.0, 1.0);
-    glUniform3f(luColor, 1.0, 0.0, 1.0);
-    glUniform3f(luCPos, 0.0, 0.0, -3.0);
-    glUniform3f(luCRot, 0.0, 0.0, 0.0);
-    glUniform4f(luCProj, 1.0, 4.0 / 3.0, 0.1, 10.0);
-    glUniform3f(luLightD, 0.0, 0.0, 1.0);
-
-    glBindBuffer(GL_ARRAY_BUFFER, bCuboid);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bCuboidIndex);
-    glVertexAttribPointer(laPosition, 3, GL_FLOAT, false, sizeof(float) * 8, (void*)(0));
-    glVertexAttribPointer(laTexcoord, 2, GL_FLOAT, false, sizeof(float) * 8, (void*)(sizeof(float) * 3));
-    glVertexAttribPointer(laNormal, 3, GL_FLOAT, false, sizeof(float) * 8, (void*)(sizeof(float) * 5));
-    glEnableVertexAttribArray(laPosition);
-    glEnableVertexAttribArray(laTexcoord);
-    glEnableVertexAttribArray(laNormal);
-    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, (void*)(0));
-    //std::cout << glGetError() << std::endl;
+    glEnable(GL_DEPTH_TEST);
+    c->render(this, this->camera, this->world->lightD);
     
     glfwSwapBuffers(window);
     glfwPollEvents();

@@ -111,8 +111,8 @@ void main() {
             0.0, 0.0, 1.0, 0.0,
             0.0, 0.0, 0.0, 1.0
         );
-        float fov = u_c_proj.x;
-        float asp = u_c_proj.y;
+        float asp = u_c_proj.x;
+        float fov = u_c_proj.y;
         float near = u_c_proj.z;
         float far = u_c_proj.w;
         mat4 m_cam_proj = mat4(

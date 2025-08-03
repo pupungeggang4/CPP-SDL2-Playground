@@ -7,19 +7,27 @@ class Vec3;
 class Part3;
 class SingleObj;
 class ColorCuboid3;
+class Camera3;
+class World;
+using std::shared_ptr, std::make_shared;
 
 class Game {
     public:
         int success; float scale;
+        unsigned int fCurrent = 0, fPrevious = 0, delta = 0;
         char infoLog[2048];
         GLuint program, vShader, fShader;
         GLuint vao, bTriangle, bHUD, bCuboid, bCuboidIndex;
         GLint luModeV, luPPos, luPSize, luPRot, luMPos, luMSize, luMRot, luCPos, luCRot, luCProj, luModeF, luLightD, luColor, laPosition, laTexcoord, laNormal;
         GLFWwindow *window;
 
+        shared_ptr<World> world; shared_ptr<Camera3> camera;
+        shared_ptr<ColorCuboid3> c;
+
         Game();
         void gameGLInit();
         void gameSDLInit();
+        void gameVarInit();
         void run();
         void loop();
         static void cbWindowSizeChange(GLFWwindow* window, int width, int height);
@@ -38,13 +46,13 @@ class Shape3 {
 
 class Cuboid3 : public Shape3 {
     public:
-        std::shared_ptr<Vec3> pos, size, rot;
-        Cuboid3(std::shared_ptr<Vec3> pos, std::shared_ptr<Vec3> size, std::shared_ptr<Vec3> rot);
+        shared_ptr<Vec3> pos, size, rot;
+        Cuboid3(shared_ptr<Vec3> pos, shared_ptr<Vec3> size, shared_ptr<Vec3> rot);
 };
 
 class Part3 {
     public:
-        std::shared_ptr<Shape3> shape;
+        shared_ptr<Shape3> shape;
 };
 
 class SingleObj {
@@ -54,7 +62,21 @@ class SingleObj {
 
 class ColorCuboid3 {
     public:
-        std::shared_ptr<Vec3> pos, size, rot;
+        shared_ptr<Vec3> pos, size, rot;
         std::array<float, 4> color;
-        ColorCuboid3(std::shared_ptr<Vec3> pos, std::shared_ptr<Vec3> size, std::shared_ptr<Vec3> rot, std::array<float, 4> color);
+        ColorCuboid3(shared_ptr<Vec3> pos, shared_ptr<Vec3> size, shared_ptr<Vec3> rot, std::array<float, 4> color);
+        void render(Game *game, shared_ptr<Camera3> camera, shared_ptr<Vec3> lightD);
+};
+
+class Camera3 {
+    public:
+        shared_ptr<Vec3> pos, rot;
+        float asp, fov, near, far;
+        Camera3();
+};
+
+class World {
+    public:
+        shared_ptr<Vec3> lightD;
+        World();
 };
