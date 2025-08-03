@@ -11,6 +11,7 @@
 
 #include <sstream>
 #include <fstream>
+#include <memory>
 
 // Library Headers
 #include <glad/glad.h>

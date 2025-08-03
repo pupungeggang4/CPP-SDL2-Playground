@@ -13,8 +13,8 @@ class Game {
         int success; float scale;
         char infoLog[2048];
         GLuint program, vShader, fShader;
-        GLuint vao, bTriangle;
-        GLint laPosition;
+        GLuint vao, bTriangle, bHUD, bCuboid, bCuboidIndex;
+        GLint luModeV, luPPos, luPSize, luPRot, luMPos, luMSize, luMRot, luCPos, luCRot, luCProj, luModeF, luLightD, luColor, laPosition, laTexcoord, laNormal;
         GLFWwindow *window;
 
         Game();
@@ -38,13 +38,13 @@ class Shape3 {
 
 class Cuboid3 : public Shape3 {
     public:
-        Vec3 pos = Vec3(), size = Vec3(), rot = Vec3();
-        Cuboid3(Vec3 pos, Vec3 size, Vec3 rot);
+        std::shared_ptr<Vec3> pos, size, rot;
+        Cuboid3(std::shared_ptr<Vec3> pos, std::shared_ptr<Vec3> size, std::shared_ptr<Vec3> rot);
 };
 
 class Part3 {
     public:
-        Shape3 shape;
+        std::shared_ptr<Shape3> shape;
 };
 
 class SingleObj {
@@ -54,7 +54,7 @@ class SingleObj {
 
 class ColorCuboid3 {
     public:
-        Vec3 pos = Vec3(), size = Vec3(), rot = Vec3();
+        std::shared_ptr<Vec3> pos, size, rot;
         std::array<float, 4> color;
-        ColorCuboid3(Vec3 pos, Vec3 size, Vec3 rot, std::array<float, 4> color);
+        ColorCuboid3(std::shared_ptr<Vec3> pos, std::shared_ptr<Vec3> size, std::shared_ptr<Vec3> rot, std::array<float, 4> color);
 };
