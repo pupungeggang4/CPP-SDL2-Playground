@@ -7,6 +7,8 @@
 #include <cmath>
 
 #include <string>
+#include <vector>
+#include <array>
 #include <algorithm>
 
 #include <sstream>
