@@ -114,7 +114,7 @@ void Game::gameVarInit() {
     world = make_shared<World>();
     std::array<float, 4> a = {0.0, 1.0, 1.0, 1.0};
     c = make_shared<ColorCuboid3>(
-        make_shared<Vec3>(0.0, 0.0, 0.0), make_shared<Vec3>(0.3, 0.3, 0.3), make_shared<Vec3>(0.0, 0.0, 0.0), (std::array<float, 4>){0.0, 1.0, 1.0, 1.0}
+        make_shared<Vec3>(0.0, 0.0, 0.0), make_shared<Vec3>(0.5, 0.5, 0.5), make_shared<Vec3>(0.0, 0.0, 0.0), (std::array<float, 4>){0.0, 1.0, 1.0, 1.0}
     );
 }
 
