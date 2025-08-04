@@ -11,7 +11,7 @@ Game::Game() {
 void Game::gameSDLInit() {
     SDL_Init(SDL_INIT_VIDEO);
 
-    #ifdef __LINUX__
+    #if SCALED == 1
     window = SDL_CreateWindow("2D Adventure Game", 0, 0, 1280 * 1.5, 720 * 1.5, SDL_WINDOW_SHOWN);
     scale = 1.5;
     #else
