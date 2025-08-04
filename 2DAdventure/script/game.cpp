@@ -19,6 +19,7 @@ void Game::gameSDLInit() {
     scale = 1;
     #endif
     screenRect = new SDL_Rect({0, 0, int(1280 * scale), int(720 * scale)});
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     surface = SDL_GetWindowSurface(window);
     surfaceUI = SDL_CreateRGBSurface(0, 1280, 720, 32, 0, 0, 0, 0);
 }
@@ -50,10 +51,9 @@ void Game::run() {
 
 void Game::loop() {
     SDL_Rect a = {0, 0, 640, 720};
-    SDL_FillRect(surfaceUI, NULL, 0x00000000);
-    SDL_FillRect(surface, NULL, 0xFFFFFFFF);
-    SDL_FillRect(surfaceUI, &a, 0xFFFF00FF);
-    SDL_BlitScaled(surfaceUI, NULL, surface, screenRect);
-    SDL_UpdateWindowSurface(window);
-
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
+    SDL_RenderFillRect(renderer, &a);
+    SDL_RenderPresent(renderer);
 }
