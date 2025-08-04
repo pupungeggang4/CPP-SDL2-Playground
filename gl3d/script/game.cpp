@@ -119,14 +119,18 @@ void Game::gameVarInit() {
 }
 
 void Game::run() {
-    int d = 16;
     while (!glfwWindowShouldClose(window)) {
-        fCurrent = SDL_GetTicks();
-        delta = fCurrent - fPrevious;
-        if (delta > d) {
-            fPrevious = SDL_GetTicks();
-            loop();
+        unsigned int start = SDL_GetTicks();
+        loop();
+        unsigned int end = SDL_GetTicks();
+        delta = end - start;
+
+        if (delta < fDelta) {
+            delta = fDelta;
+            SDL_Delay(fDelta - delta);
         }
+
+        glfwPollEvents();
     }
 }
 
@@ -146,7 +150,6 @@ void Game::loop() {
     c->render(this, this->camera, this->world->lightD);
     
     glfwSwapBuffers(window);
-    glfwPollEvents();
 }
 
 void Game::cbWindowSizeChange(GLFWwindow* window, int width, int height) {
@@ -157,5 +160,5 @@ void Game::cbWindowSizeChange(GLFWwindow* window, int width, int height) {
 }
 
 void Game::cbKey(GLFWwindow* window, int key, int scancode, int action, int mods) {
-
+    std::cout << action << std::endl;
 }

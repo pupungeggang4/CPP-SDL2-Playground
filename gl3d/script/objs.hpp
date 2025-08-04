@@ -14,7 +14,7 @@ using std::shared_ptr, std::make_shared;
 class Game {
     public:
         int success; float scale;
-        unsigned int fCurrent = 0, fPrevious = 0, delta = 0;
+        unsigned int delta = 0, fDelta = 16;
         char infoLog[2048];
         GLuint program, vShader, fShader;
         GLuint vao, bTriangle, bHUD, bCuboid, bCuboidIndex;

@@ -26,12 +26,24 @@ void Game::gameSDLInit() {
 void Game::run() {
     SDL_Event e;
     while (running) {
+        unsigned int start = SDL_GetTicks();
         loop();
+        unsigned int end = SDL_GetTicks();
+        delta = end - start;
 
         while (SDL_PollEvent(&e)) {
             if (e.type == SDL_QUIT) {
                 running = false;
+            } else if (e.type == SDL_KEYDOWN) {
+                std::cout << "key down" << std::endl;
+            } else if (e.type == SDL_KEYUP) {
+                std::cout << "key up" << std::endl;
             }
+        }
+
+        if (delta < fDelta) {
+            delta = fDelta;
+            SDL_Delay(fDelta - delta);
         }
     }
 }

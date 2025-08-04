@@ -12,6 +12,7 @@ class Game {
     public:
         bool running = true;
         float scale;
+        int delta, fDelta = 16;
         std::shared_ptr<Player> player = std::make_shared<Player>();
         std::shared_ptr<World> world = std::make_shared<World>();
         SDL_Window *window; SDL_Surface *surface, *surfaceUI; SDL_Renderer *renderer;
