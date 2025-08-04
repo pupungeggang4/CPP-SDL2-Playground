@@ -26,12 +26,8 @@ void Game::gameSDLInit() {
 void Game::run() {
     SDL_Event e;
     while (running) {
-        SDL_Rect a = {0, 0, 640, 720};
-        SDL_FillRect(surfaceUI, NULL, 0x00000000);
-        SDL_FillRect(surface, NULL, 0xFFFFFFFF);
-        SDL_FillRect(surfaceUI, &a, 0xFFFF00FF);
-        SDL_BlitScaled(surfaceUI, NULL, surface, screenRect);
-        SDL_UpdateWindowSurface(window);
+        loop();
+
         while (SDL_PollEvent(&e)) {
             if (e.type == SDL_QUIT) {
                 running = false;
@@ -41,5 +37,11 @@ void Game::run() {
 }
 
 void Game::loop() {
+    SDL_Rect a = {0, 0, 640, 720};
+    SDL_FillRect(surfaceUI, NULL, 0x00000000);
+    SDL_FillRect(surface, NULL, 0xFFFFFFFF);
+    SDL_FillRect(surfaceUI, &a, 0xFFFF00FF);
+    SDL_BlitScaled(surfaceUI, NULL, surface, screenRect);
+    SDL_UpdateWindowSurface(window);
 
 }
