@@ -23,7 +23,7 @@ void Game::gameGLInit() {
     glfwSwapInterval(1);
     glfwSetFramebufferSizeCallback(window, cbWindowSizeChange);
     glfwSetKeyCallback(window, cbKey);
-    gladLoadGL();
+    gladLoadGL((GLADloadfunc) glfwGetProcAddress);
 
     // GL
     // Loading Shader
