@@ -3,3 +3,6 @@ linux:
 
 linux2:
 	clang++ main2.cpp -o main2 -lSDL2 -lSDL2_ttf -lGL -lGLU -std=c++11 -w
+
+mingw2:
+	clang++ main2.cpp -o main2 -lSDL2main -lSDL2 -lSDL2_ttf -lopengl32 -std=c++11 -w
