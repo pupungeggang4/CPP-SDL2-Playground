@@ -15,7 +15,8 @@ int main(int argc, char *argv[]) {
 
     int width, height;
     SDL_QueryTexture(texturetext, NULL, NULL, &width, &height);
-    SDL_Rect renderRect = {24, 24, width, height};
+    SDL_Rect renderRect = {0, 0, width, height};
+    renderRect = {24, 24, width, height};
     
     SDL_Vertex vertices[3] = {
         {{400, 300}, {255, 0, 0, 255}, {0, 0}}, // Red vertex

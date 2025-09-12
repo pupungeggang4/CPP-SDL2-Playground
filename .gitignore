@@ -76,7 +76,7 @@ luac.out
 *.swp
 *.png~
 Release/
-main
+main*
 
 glad/
 glades/
